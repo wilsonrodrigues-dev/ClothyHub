@@ -31,3 +31,9 @@ export const validateRegister = [
 
   validateRequest
 ];
+
+export const validateLogin=[
+  body("email").isEmail().withMessage("Emal is invalid"),
+  body("password").isLength({min:6}).withMessage("Password must be at least 6 characters"),
+  validateRequest
+]
