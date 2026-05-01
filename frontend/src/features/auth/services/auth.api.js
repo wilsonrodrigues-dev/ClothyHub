@@ -8,7 +8,9 @@ const api=axios.create({
 
 export async function register({fullname,email,contact,password,isSeller}) {
     try {
+        console.log("api check res",isSeller)
         const response=await api.post("/auth/register",{fullname,email,contact,password,isSeller})
+        console.log(response)
         return response
         
     } catch (err) {

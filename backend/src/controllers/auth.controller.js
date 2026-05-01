@@ -26,7 +26,7 @@ async function sendTokenResponse(user,res,message) {
 }
 
 export async function registerController(req,res) {
-    const {fullname,contact,email,password}=req.body
+    const {fullname,contact,email,password,isSeller}=req.body
 
     try {
         const isUserExists=await userModel.findOne({$or:[{email},{contact}]})
@@ -38,11 +38,12 @@ export async function registerController(req,res) {
         }
 
         const user=await userModel.create({
-            fullname,contact,email,password
+            fullname,contact,email,password,
+            role:isSeller?"seller":"buyer"
         })
         await sendTokenResponse(user,res,"user registerd successfully")
 
-
+ 
     } catch (error) {
         console.log(error)
         return res.status(500).json({message:"Server Error"})

@@ -8,14 +8,20 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const {loading,user,handleRegister,handleLogin}=useauth()
+  const {loading,user,handleRegister,handleLogin,setUser}=useauth()
 
 
   const handleLoginSubmit= async(e)=>{
     e.preventDefault()
     const res=await handleLogin({email,password})
-    console.log("final res",res)
-    navigate("/")
+    setUser(res)
+    
+    if(res.role=="seller"){
+      navigate("/sellerdashboard")
+    }
+    else{
+      navigate("/")
+    }
   }
 
   if(loading){

@@ -9,10 +9,10 @@ export const useauth=()=>{
     async function handleRegister({fullname,email,contact,password,isSeller=false}) {
         try {
             setLoading(true)
-            const data=await register({fullname,email,contact,password,isSeller})
-            setUser(data)
+            const {data}=await register({fullname,email,contact,password,isSeller})
+            setUser(data.user)
             setLoading(false)
-            return data
+            return data.user
         } catch (err) {
             console.log("hook error",err)
         }
@@ -21,10 +21,9 @@ export const useauth=()=>{
     async function handleLogin({email,password}) {
         try {
             setLoading(true)
-            const data=await login({email,password})
-            setUser(data)
+            const {data}=await login({email,password})
             setLoading(false)
-            return data
+            return data.user
 
         } catch (err) {
             console.log("hook error",err)
@@ -33,7 +32,7 @@ export const useauth=()=>{
     }
 
 
-    return ({loading,user,handleRegister,handleLogin})
+    return ({loading,user,handleRegister,handleLogin,setUser})
 
 
 }

@@ -10,18 +10,20 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [password, setPassword] = useState("");
+  const [selller, setSeller] = useState(false)
 
   const { loading, handleRegister } = useauth();
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    const res = await handleRegister({ fullname, email, contact, password });
+    console.log(fullname,email,password,contact,selller)
+    const res = await handleRegister({ fullname, email, contact, password,isSeller:selller });
     console.log(res);
     navigate("/login");
   };
 
-    if(loading){
-    return <h1>Loading....</h1>
+  if (loading) {
+    return <h1>Loading....</h1>;
   }
 
   return (
@@ -76,6 +78,13 @@ const Register = () => {
                 setPassword(e.target.value);
               }}
             />
+            <div>
+              <input type="checkbox" name="seller" id="seller" checked={selller} onChange={(e)=>{
+                setSeller(e.target.checked)
+              }} />
+              <label>Register As Seller</label>
+            </div>
+
             <button type="submit">Sign Up</button>
           </form>
           <hr />
