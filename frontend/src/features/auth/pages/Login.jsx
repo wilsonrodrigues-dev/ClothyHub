@@ -1,6 +1,7 @@
 import React, { useEffec,useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useauth } from "../Hooks/useauth.js";
+import ContinueWithGoogle from "../authcomponents/ContinueWithGoogle.jsx";
 
 const Login = () => {
 
@@ -15,6 +16,7 @@ const Login = () => {
     e.preventDefault()
     const res=await handleLogin({email,password})
     setUser(res)
+    console.log(res)
     
     if(res.role=="seller"){
       navigate("/sellerdashboard")
@@ -51,10 +53,7 @@ const Login = () => {
           </form>
           <hr />
           <div>
-            <div className="gooogle">
-              <div className="logo"></div>
-              <h3>Sign up with Google</h3>
-            </div>
+            <ContinueWithGoogle />
           </div>
           <p>
             Don't Have an Account? <Link to={"/register"}>Sign Up</Link>

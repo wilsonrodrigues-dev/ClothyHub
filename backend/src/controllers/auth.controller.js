@@ -92,3 +92,54 @@ export async function getMe(req, res) {
     },
   });
 }
+
+export async function setRole(req,res) {
+  const user=await userModel.findById(req.user.id)
+  user.role=req.body.role
+  await user.save()
+
+  res.json({ success: true, user });
+  
+}
+
+export async function googleCallback(req, res) {
+  const { id, displayName, emails, photos } = req.user;
+
+  const email = emails[0].value;
+  const profilepic = photos[0].value;
+
+  let user = await userModel.findOne({ email });
+
+  let isNewUser=false
+
+  if (!user) {
+    user = await userModel.create({
+      email,
+      googleId: id,
+      fullname: displayName,
+      role:null,
+    });
+    isNewUser=true
+  }
+
+  const token = jwt.sign(
+    {
+      id: user._id,
+    },
+    config.JWT_SECRET,
+    { expiresIn: "7d" },
+  );
+
+
+  res.cookie("token", token);
+
+  if(!user.role){
+     return res.redirect("http://localhost:5173/select-role");
+  }
+
+  if(user.role==="seller"){
+     return res.redirect("http://localhost:5173/sellerdashboard");
+  }
+
+  res.redirect("http://localhost:5173/");
+}

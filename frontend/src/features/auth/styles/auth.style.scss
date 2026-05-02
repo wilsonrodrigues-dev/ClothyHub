@@ -142,6 +142,43 @@
     height: 100%;
     object-fit: cover;
 }
+.google-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.google-btn-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  width: 100%;
+  max-width: 320px;
+  padding: 10px 16px;
+
+  background-color: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 6px;
+
+  text-decoration: none;
+  color: #3c4043;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.google-btn-inner:hover {
+  background: #f7f8f8;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3);
+}
+
+.google-icon {
+  width: 18px;
+  height: 18px;
+}
 
 /* Responsive */
 @media (max-width: 480px) {

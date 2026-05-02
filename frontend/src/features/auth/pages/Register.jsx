@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/auth.style.scss";
 import { useauth } from "../Hooks/useauth";
+import ContinueWithGoogle from "../authcomponents/ContinueWithGoogle";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -89,10 +90,7 @@ const Register = () => {
           </form>
           <hr />
           <div>
-            <div className="gooogle">
-              <div className="logo"></div>
-              <h3>Sign up with Google</h3>
-            </div>
+              <ContinueWithGoogle />
           </div>
           <p>
             Already Have an Account? <Link to={"/login"}>Sign In</Link>

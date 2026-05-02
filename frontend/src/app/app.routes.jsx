@@ -4,6 +4,7 @@ import Login from '../features/auth/pages/Login'
 import Home from '../features/Home/home'
 import Sellerdashboard from '../features/sellerdashboard/Sellerdashboard'
 import Protected from '../features/auth/authcomponents/Protected'
+import SelectRole from '../features/auth/authcomponents/SelectRole'
 
 export const router=createBrowserRouter([
     {
@@ -12,7 +13,7 @@ export const router=createBrowserRouter([
     },
     {
         path:"/sellerdashboard",
-        element:<Sellerdashboard />
+        element:<Protected><Sellerdashboard /></Protected>
     },
     {
         path:"/register",
@@ -22,5 +23,9 @@ export const router=createBrowserRouter([
         path:"/login",
         element:<Login />
     },
+    {
+        path:"/select-role",
+        element:<SelectRole />
+    }
 ])
 

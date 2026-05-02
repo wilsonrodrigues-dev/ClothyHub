@@ -8,22 +8,27 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: false,
     unique: true,
   },
   contact: {
     type: String,
-    required: true,
+    required: false,
   },
   password: {
     type: String,
-    required: true,
+    required: function(){
+      return !this.googleId
+    },
   },
   role: {
     type: String,
     enum: ["buyer", "seller"],
     default: "buyer",
   },
+  googleId:{
+    type:String
+  }
 });
 
 userSchema.pre("save",async function() {
