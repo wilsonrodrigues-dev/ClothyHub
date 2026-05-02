@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api=axios.create({
-    baseURL:"http://localhost:3000/api",
+    baseURL:"/api/auth",
     withCredentials:true
 })
 
@@ -9,7 +9,7 @@ const api=axios.create({
 export async function register({fullname,email,contact,password,isSeller}) {
     try {
         console.log("api check res",isSeller)
-        const response=await api.post("/auth/register",{fullname,email,contact,password,isSeller})
+        const response=await api.post("/register",{fullname,email,contact,password,isSeller})
         console.log(response)
         return response
         
@@ -22,7 +22,7 @@ export async function register({fullname,email,contact,password,isSeller}) {
 
 export async function login({email,password}) {
     try {
-        const response=await api.post("/auth/login",{email,password})
+        const response=await api.post("/login",{email,password})
         return response
         
     } catch (err) {
@@ -34,7 +34,7 @@ export async function login({email,password}) {
 
 export async function getMe() {
     try {
-        const res=await api.get("/auth/getMe")
+        const res=await api.get("/getMe")
         return res.data
     } catch (error) {
         console.log("api error", error.response?.data || error.message);
