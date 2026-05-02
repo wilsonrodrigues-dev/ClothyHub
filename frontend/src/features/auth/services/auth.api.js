@@ -19,6 +19,7 @@ export async function register({fullname,email,contact,password,isSeller}) {
     }
     
 }
+
 export async function login({email,password}) {
     try {
         const response=await api.post("/auth/login",{email,password})
@@ -29,4 +30,15 @@ export async function login({email,password}) {
         
     }
     
+}
+
+export async function getMe() {
+    try {
+        const res=await api.get("/auth/getMe")
+        return res.data
+    } catch (error) {
+        console.log("api error", error.response?.data || error.message);
+        return null;
+        
+    }
 }
