@@ -1,12 +1,15 @@
 import React from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useauth } from '../Hooks/useauth';
+
 
 const SelectRole = () => {
   const navigate = useNavigate();
+  const {setrole}=useauth()
 
   const handleRole = async (role) => {
-    await axios.post("/auth/setrole", { role }, { withCredentials: true });
+    await setrole({role})
 
     if (role === "seller") {
       navigate("/sellerdashboard");

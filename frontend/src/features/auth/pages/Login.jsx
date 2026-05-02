@@ -16,7 +16,7 @@ const Login = () => {
     e.preventDefault()
     const res=await handleLogin({email,password})
     setUser(res)
-    console.log(res)
+
     
     if(res.role=="seller"){
       navigate("/sellerdashboard")

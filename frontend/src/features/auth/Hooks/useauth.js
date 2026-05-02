@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { register, login, getMe } from "../services/auth.api.js";
+import { register, login, getMe,selectrole } from "../services/auth.api.js";
 import { AuthContext } from "../auth.context.jsx";
 
 export const useauth = () => {
@@ -41,29 +41,21 @@ export const useauth = () => {
     }
   }
 
-  async function handleGetMe() {
+
+
+  async function setrole({role}) {
     try {
-      setLoading(true);
-
-      const data = await getMe();
-
-      if (!data || !data.user) {
-        setUser(null); 
-        return;
-      }
-
-      setUser(data.user);
+      setLoading(true)
+      const res=await selectrole({role})
+      setLoading(false)
+      return res
     } catch (error) {
-      console.log("handleGetMe error:", error);
-      setUser(null); 
-    } finally {
-      setLoading(false); 
+      console.log(error)
     }
+    
   }
 
-  useEffect(() => {
-    handleGetMe();
-  }, []);
 
-  return { loading, user, handleRegister, handleLogin, setUser };
+
+  return { loading, user, handleRegister, handleLogin, setUser,setrole };
 };

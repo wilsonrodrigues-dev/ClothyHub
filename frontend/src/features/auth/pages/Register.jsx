@@ -17,9 +17,9 @@ const Register = () => {
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    console.log(fullname,email,password,contact,selller)
+
     const res = await handleRegister({ fullname, email, contact, password,isSeller:selller });
-    console.log(res);
+
     navigate("/login");
   };
 
